@@ -44,10 +44,67 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun OperatorDemoApp() {
     val context = LocalContext.current
-    
+    //conditions
     var input by remember { mutableStateOf("")}
     var result by remember { mutableStateOf("")}
     var isFinished by remember {mutableStateOf(false) }
+    //creation
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "введите символ:",
+            fontSize = 20.sp,
+            modifier = Modifier.padding(bottom = 12.dp)
+        )
 
+        OutlinedTextField(
+            value = input,
+            onValueChange = {
+                if (it.length <= 1) input = it
+            },
+            enabled = !isFinished,
+            label = { Text("например: а") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.None
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
 
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(
+            onClick = {
+                val ch = input.firstOrNull()
+                if (ch == null) {
+                    result = "введите символ!"
+                    return@Button
+                }
+
+                when {
+                    !(ch in 'a'..'z') -> {
+                        result = "ошибка: введена не латинская строчная буква.\nпрограмма завершена."
+                        Toast.makeText(context, "программа завершена", Toast.LENGTH_SHORT).show()
+                        isFinished = true
+                    }
+
+                    ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' -> {
+                        result = "это гласные буквы"
+                    }
+                    else -> {
+                        result = "возможно это согласные буквы"
+                    }
+                }
+            },
+            enabled = !isFinished,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("проверить")
+        }
+    }
 }
