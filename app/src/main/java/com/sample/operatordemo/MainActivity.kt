@@ -106,5 +106,26 @@ fun OperatorDemoApp() {
         ) {
             Text("проверить")
         }
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Text(
+            text = result,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        if (isFinished) {
+            Spacer(modifier = Modifier.height(20.dp))
+            TextButton(onClick = {
+                input = ""
+                result = ""
+                isFinished = false
+            }) {
+                Text("Запустить снова")
+            }
+        }
     }
 }
