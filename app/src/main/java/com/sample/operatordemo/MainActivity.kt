@@ -129,3 +129,11 @@ fun OperatorDemoApp() {
         }
     }
 }
+
+@Preview(showBackground = true, name = "OperatorDemo Preview")
+@Composable
+fun OperatorDemoPreview() {
+    MaterialTheme {
+        OperatorDemoApp()
+    }
+}
