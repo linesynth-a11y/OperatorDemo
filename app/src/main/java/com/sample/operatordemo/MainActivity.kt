@@ -40,3 +40,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Composable
+fun OperatorDemoApp() {
+    val context = LocalContext.current
+    
+    var input by remember { mutableStateOf("")}
+    var result by remember { mutableStateOf("")}
+    var isFinished by remember {mutableStateOf(false) }
+
+
+}
